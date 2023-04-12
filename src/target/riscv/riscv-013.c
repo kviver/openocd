@@ -453,7 +453,7 @@ static dmi_status_t dmi_scan(struct target *target, uint32_t *address_in,
 {
 	riscv013_info_t *info = get_info(target);
 	uint8_t in[8] = {0};
-	uint8_t out[8];
+	uint8_t out[8] = {0};
 	struct scan_field field = {
 		.num_bits = info->abits + DTM_DMI_OP_LENGTH + DTM_DMI_DATA_LENGTH,
 		.out_value = out,

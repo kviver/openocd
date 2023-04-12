@@ -245,14 +245,14 @@ static int arm920t_read_cp15_interpreted(struct target *target,
 	uint32_t cp15_opcode, uint32_t address, uint32_t *value)
 {
 	struct arm *arm = target_to_arm(target);
-	uint32_t *regs_p[1];
-	uint32_t regs[2];
+	// uint32_t *regs_p[1];
+	// uint32_t regs[2];
 	uint32_t cp15c15 = 0x0;
 	struct reg *r = arm->core_cache->reg_list;
 
 	/* load address into R1 */
-	regs[1] = address;
-	arm9tdmi_write_core_regs(target, 0x2, regs);
+	// regs[1] = address;
+	// arm9tdmi_write_core_regs(target, 0x2, regs);
 
 	/* read-modify-write CP15 test state register
 	* to enable interpreted access mode */
@@ -269,8 +269,8 @@ static int arm920t_read_cp15_interpreted(struct target *target,
 	arm920t_write_cp15_physical(target, CP15PHYS_TESTSTATE, cp15c15);
 
 	/* retrieve value from R0 */
-	regs_p[0] = value;
-	arm9tdmi_read_core_regs(target, 0x1, regs_p);
+	// regs_p[0] = value;
+	// arm9tdmi_read_core_regs(target, 0x1, regs_p);
 	jtag_execute_queue();
 
 #ifdef _DEBUG_INSTRUCTION_EXECUTION_
@@ -295,13 +295,13 @@ int arm920t_write_cp15_interpreted(struct target *target,
 {
 	uint32_t cp15c15 = 0x0;
 	struct arm *arm = target_to_arm(target);
-	uint32_t regs[2];
+	// uint32_t regs[2];
 	struct reg *r = arm->core_cache->reg_list;
 
 	/* load value, address into R0, R1 */
-	regs[0] = value;
-	regs[1] = address;
-	arm9tdmi_write_core_regs(target, 0x3, regs);
+	// regs[0] = value;
+	// regs[1] = address;
+	// arm9tdmi_write_core_regs(target, 0x3, regs);
 
 	/* read-modify-write CP15 test state register
 	* to enable interpreted access mode */
@@ -1537,8 +1537,8 @@ COMMAND_HANDLER(arm920t_handle_cp15i_command)
 				return ERROR_OK;
 			}
 
-			command_print(CMD_CTX, "%8.8" PRIx32 ": %8.8" PRIx32,
-				opcode, value);
+			/*command_print(CMD_CTX, "%8.8" PRIx32 ": %8.8" PRIx32,
+				opcode, value);*/
 		} else if (CMD_ARGC == 2) {
 			uint32_t value;
 			COMMAND_PARSE_NUMBER(u32, CMD_ARGV[1], value);
